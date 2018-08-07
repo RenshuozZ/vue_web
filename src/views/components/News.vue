@@ -20,13 +20,15 @@
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+          <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
           <el-button type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination :current-page="searchResult.pageIndex" :page-size="searchResult.pageSize" layout="total, prev, pager, next, jumper" :total="searchResult.recordCount">
-    </el-pagination>
+    <div class="pagination">
+      <el-pagination @current-change="handleCurrentChange" :current-page="searchResult.pageIndex" :page-size="searchResult.pageSize" layout="total, prev, pager, next, jumper" :total="searchResult.recordCount">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -35,36 +37,47 @@ import newsapi from "../../api/new";
 export default {
   name: "News",
   methods: {
+    handleCurrentChange(val) {
+      this.searchResult.pageIndex = val;
+      this.search();
+    },
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    handleClick(row) {
-      console.log(row);
+    edit(row) {
+      // this.$router.push({ name: "newsinfo", params: { newsId: row.id } });
+      // this.$router.push({ path: "/admin/newsinfo", query: { newsId: row.id } });
+      this.$router.push({ name: "newsinfo", query: { newsId: row.id } });
     },
     search() {
       var vm = this;
-      newsapi.searchNews(vm.keyword, vm.pageIndex, vm.pageSize)
+      newsapi
+        .searchNews(
+          vm.keyword,
+          vm.searchResult.pageIndex,
+          vm.searchResult.pageSize
+        )
         .then(function(response) {
           vm.searchResult = response;
         });
     },
     add(newid) {
-      this.$router.push({ name: "newsinfo",params: { newsId: '' } });
+      this.$router.push({ name: "newsinfo" });
     }
   },
   data: function() {
     return {
       searchResult: {
         list: [],
-        pageIndex: 1,
-        pageSize: 10,
+        pageIndex: null,
+        pageSize: null,
         recordCount: null
       },
       keyword: "",
       multipleSelection: []
     };
   },
-  created() {
+  mounted() {
     this.search();
   }
 };
@@ -74,11 +87,14 @@ export default {
 .news {
   .search {
     float: right;
-    text-align: right;
     margin: 0 0 30px 0;
     .el-input {
       width: 220px;
+      margin-right: 10px;
     }
+  }
+  .pagination {
+    text-align: center;
   }
   .el-pagination {
     margin-top: 30px;

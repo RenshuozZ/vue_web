@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 
 Vue.use(Vuex);
-export default new Vuex.Store({
+const store= new Vuex.Store({
     state: {
         user: {},
         token: null,
@@ -18,10 +18,11 @@ export default new Vuex.Store({
         },
        "2": (state) => {
             localStorage.removeItem('token');
-            state.token = null
+            state.token = null;
         },
        "3": (state, data) => {
             state.title = data;
         }
     }
-})
+});
+export default store;

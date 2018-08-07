@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
-    <el-aside width="220px" >
-      <el-menu :default-openeds="['']" router>
+    <el-aside>
+      <el-menu :default-active='$route.path' router>
         <div class="logo-container">
           <img class="logo" src="../../assets/adminlogo.png" />
         </div>
@@ -17,7 +17,7 @@
           <el-menu-item index="/admin/news">文章管理</el-menu-item>
         </el-submenu>
         <el-menu-item index="/default">测试</el-menu-item>
-      </el-menu>     
+      </el-menu>
     </el-aside>
   </div>
 </template>
@@ -25,13 +25,13 @@
 <script>
 export default {
   name: "Sidebar",
-  props: ["active"], 
+  // props: ["active"]
 };
 </script>
 
 <style scoped lang="scss" >
 .sidebar {
-  height: 100%;
+  width: 200px;
   .logo-container {
     text-align: center;
     width: 100%;

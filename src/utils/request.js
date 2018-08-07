@@ -3,11 +3,12 @@ import qs from 'qs'
 import {
   Message
 } from 'element-ui'
+import {showFullScreenLoading,tryHideFullScreenLoading} from './loading'
 
 // create an axios instance
 const service = axios.create({
   // baseURL: process.env.BASE_API, // api的base_url
-  baseURL: "http://localhost:999/api", // api的base_url
+  baseURL: "http://localhost:8888/api", // api的base_url
   // baseURL: "http://localhost:8888/api", // api的base_url
   timeout: 5000 // request timeout
 })
@@ -18,10 +19,11 @@ service.interceptors.request.use(config => {
   // if (store.state.token) {
   //   config.headers.Authorization = `bearer ${store.state.token}`;
   // }
-  // if(config.method === 'post') {
+  // if(config.method === 'get') {
   //   config.data = qs.stringify(config.data);
   // }
-  return config
+  showFullScreenLoading();
+  return config;
 }, error => {
   // Do something with request error
   console.log(error) // for debug
@@ -32,6 +34,7 @@ service.interceptors.request.use(config => {
 // respone interceptor
 service.interceptors.response.use(
   response => {
+    tryHideFullScreenLoading();
     return response.data;
   },
   error => {

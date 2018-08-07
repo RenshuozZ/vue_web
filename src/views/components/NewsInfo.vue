@@ -17,7 +17,9 @@
       </el-form-item>
       <el-form-item label="文章图片:">
         <el-upload class="upload-demo" action="action" :before-upload="upload" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="news.attachments" list-type="picture">
-          <el-button size="small" type="primary">点击上传<i class="el-icon-upload el-icon--right"></i></el-button>
+          <el-button size="small" type="primary">点击上传
+            <i class="el-icon-upload el-icon--right"></i>
+          </el-button>
           <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
         </el-upload>
       </el-form-item>
@@ -25,12 +27,13 @@
         <vue-editor v-model="news.content"></vue-editor>
       </el-form-item>
       <el-button type="primary" v-on:click="save">保存</el-button>
-    </el-form>    
+    </el-form>
   </div>
 </template>
 
 <script>
 import { VueEditor } from "vue2-editor";
+import newsapi from "../../api/new";
 export default {
   name: "NewsInfo",
   components: {
@@ -39,11 +42,12 @@ export default {
   data() {
     return {
       news: {
+        id: null,
         title: "",
         region: "",
         source: "",
         author: "",
-        content:"",
+        content: "",
         releaseTime: null,
         attachments: []
       }
@@ -70,8 +74,28 @@ export default {
       console.log(file);
     },
     save() {
-      console.log("submit!");
+       var self = this;
+      if (this.news.id) {
+      } else {
+        newsapi.create(this.news).then(function(response) {
+          self.getById(response.id);
+        });
+      }
+    },
+    getById() {
+      var self = this;
+      newsapi.getById(self.news.id).then(function(response) {
+        self.news = response;
+      });
     }
+  },
+  created() {
+    var self = this;
+    this.news.id = this.$route.query.newsId;
+    if (this.news.id) {
+      self.getById();
+    }
+    // this.search();
   }
 };
 </script>
