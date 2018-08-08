@@ -14,5 +14,13 @@ export default  {
       method: 'post',
       data: data
     });
+  },
+  put(url, data) {
+    return Service({
+      url: url,
+      method: 'put',
+      data: data
+    });
   }
+
 }

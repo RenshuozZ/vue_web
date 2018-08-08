@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import auth from "../../api/auth";
+import auth from "../api/auth";
 
 export default {
   name: "Login",

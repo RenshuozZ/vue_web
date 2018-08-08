@@ -1,9 +1,10 @@
 <template>
   <div class="news">
+    <el-button type="danger" v-on:click="del(multipleSelection)" plain>删除</el-button>
     <div class="search">
       <el-input v-model="keyword" placeholder="请输入内容"></el-input>
       <el-button type="primary" v-on:click="search" icon="el-icon-search">搜索</el-button>
-      <el-button type="primary" v-on:click="add" icon="el-icon-edit">新增</el-button>
+      <el-button type="success" v-on:click="add" icon="el-icon-edit">新增</el-button>
     </div>
     <el-table :data="searchResult.list" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center">
@@ -21,7 +22,7 @@
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button @click="del([scope.row])" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -45,8 +46,6 @@ export default {
       this.multipleSelection = val;
     },
     edit(row) {
-      // this.$router.push({ name: "newsinfo", params: { newsId: row.id } });
-      // this.$router.push({ path: "/admin/newsinfo", query: { newsId: row.id } });
       this.$router.push({ name: "newsinfo", query: { newsId: row.id } });
     },
     search() {
@@ -63,6 +62,20 @@ export default {
     },
     add(newid) {
       this.$router.push({ name: "newsinfo" });
+    },
+    del(news) {
+      var self = this;
+      var ids = [];
+      if (news.length > 0) {
+        news.forEach(function(v) {
+          ids.push(v.id);
+        });
+      }
+      if (ids.length > 0) {
+        newsapi.delete(ids).then(function(response) {
+          self.search();
+        });
+      }
     }
   },
   data: function() {

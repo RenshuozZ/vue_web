@@ -31,12 +31,12 @@ export default {
 
 <style scoped lang="scss" >
 .sidebar {
-  width: 200px;
+  // width: 200px;
   .logo-container {
     text-align: center;
     width: 100%;
     .logo {
-      width: 220px;
+      width: 300px;
     }
   }
 }

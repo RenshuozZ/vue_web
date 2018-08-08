@@ -9,6 +9,12 @@ export default {
     },
     create(news){      
       return  api.post('/new',news);
+    },
+    update(news){      
+      return  api.put('/new',news);
+    },
+    delete(ids){      
+      return  api.post('/new/delete',ids);
     }
 };
   
