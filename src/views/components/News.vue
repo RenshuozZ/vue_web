@@ -35,51 +35,51 @@
 </template>
 
 <script>
-import newsapi from "../../api/new";
+import newsapi from '../../api/new'
 export default {
-  name: "News",
+  name: 'News',
   methods: {
-    handleCurrentChange(val) {
-      this.searchResult.pageIndex = val;
-      this.search();
+    handleCurrentChange (val) {
+      this.searchResult.pageIndex = val
+      this.search()
     },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
+    handleSelectionChange (val) {
+      this.multipleSelection = val
     },
-    edit(row) {
-      this.$router.push({ name: "newsinfo", query: { newsId: row.id } });
+    edit (row) {
+      this.$router.push({ name: 'newsinfo', query: { newsId: row.id } })
     },
-    search() {
-      var vm = this;
+    search () {
+      var vm = this
       newsapi
         .searchNews(
           vm.keyword,
           vm.searchResult.pageIndex,
           vm.searchResult.pageSize
         )
-        .then(function(response) {
-          vm.searchResult = response;
-        });
+        .then(function (response) {
+          vm.searchResult = response
+        })
     },
-    add(newid) {
-      this.$router.push({ name: "newsinfo" });
+    add (newid) {
+      this.$router.push({ name: 'newsinfo' })
     },
-    del(news) {
-      var self = this;
-      var ids = [];
+    del (news) {
+      var self = this
+      var ids = []
       if (news.length > 0) {
-        news.forEach(function(v) {
-          ids.push(v.id);
-        });
+        news.forEach(function (v) {
+          ids.push(v.id)
+        })
       }
       if (ids.length > 0) {
-        newsapi.delete(ids).then(function(response) {
-          self.search();
-        });
+        newsapi.delete(ids).then(function (response) {
+          self.search()
+        })
       }
     }
   },
-  data: function() {
+  data: function () {
     return {
       searchResult: {
         list: [],
@@ -87,14 +87,14 @@ export default {
         pageSize: null,
         recordCount: null
       },
-      keyword: "",
+      keyword: '',
       multipleSelection: []
-    };
+    }
   },
-  mounted() {
-    this.search();
+  mounted () {
+    this.search()
   }
-};
+}
 </script>
 
 <style scoped lang='scss'>

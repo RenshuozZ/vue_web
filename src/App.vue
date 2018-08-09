@@ -8,16 +8,16 @@
 import {
   showFullScreenLoading,
   tryHideFullScreenLoading
-} from "./utils/loading";
+} from './utils/loading'
 export default {
-  name: "App",
-  beforeCreate: function() {
-    showFullScreenLoading();
+  name: 'App',
+  beforeCreate: function () {
+    showFullScreenLoading()
   },
-  created : function() {
-    tryHideFullScreenLoading();
+  created: function () {
+    tryHideFullScreenLoading()
   }
-};
+}
 </script>
 
 <style>

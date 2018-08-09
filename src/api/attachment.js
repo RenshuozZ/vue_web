@@ -1,8 +1,7 @@
-import api from '@/utils/api';
+import api from '@/utils/api'
 
 export default {
-    upload(params ){
-      return  api.post('/attachment',params);
-    }
-};
-  
+  upload (params) {
+    return api.post('/attachment', params)
+  }
+}

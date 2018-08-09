@@ -21,16 +21,16 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   methods: {
-    handleCommand(command) {
-      if (command === "quit") {
-        this.$store.commit("2");
-        this.$router.push({ name: "login" });
+    handleCommand (command) {
+      if (command === 'quit') {
+        this.$store.commit('2')
+        this.$router.push({ name: 'login' })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

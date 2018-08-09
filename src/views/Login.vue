@@ -27,26 +27,26 @@
 </template>
 
 <script>
-import auth from "../api/auth";
+import auth from '../api/auth'
 
 export default {
-  name: "Login",
+  name: 'Login',
   methods: {
-    login() {     
-      var self=this; 
-      auth.authToken(this.username, this.password).then(function(response) {
-         self.$store.commit('1', response.token);
-         self.$router.push({ name: "admin"});
-      });
+    login () {
+      var self = this
+      auth.authToken(this.username, this.password).then(function (response) {
+        self.$store.commit('1', response.token)
+        self.$router.push({ name: 'admin' })
+      })
     }
   },
-  data: function() {
+  data: function () {
     return {
       username: null,
       password: null
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

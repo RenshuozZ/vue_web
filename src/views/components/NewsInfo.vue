@@ -35,80 +35,80 @@
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
-import newsapi from "../../api/new";
-import attachmentapi from "../../api/attachment";
+import { VueEditor } from 'vue2-editor'
+import newsapi from '../../api/new'
+import attachmentapi from '../../api/attachment'
 export default {
-  name: "NewsInfo",
+  name: 'NewsInfo',
   components: {
     VueEditor
   },
-  data() {
+  data () {
     return {
       news: {
         id: null,
-        title: "",
-        region: "",
-        source: "",
-        author: "",
-        content: "",
+        title: '',
+        region: '',
+        source: '',
+        author: '',
+        content: '',
         releaseTime: null,
         attachments: []
       }
-    };
+    }
   },
   methods: {
-    upload(file) {
-      var self = this;
-      let fd = new FormData();
-      fd.append("file", file);
-      attachmentapi.upload(fd).then(function(response) {
-        self.news.attachments = self.news.attachments.concat(response);
-      });
-      return false; // 返回false不会自动上传
+    upload (file) {
+      var self = this
+      let fd = new FormData()
+      fd.append('file', file)
+      attachmentapi.upload(fd).then(function (response) {
+        self.news.attachments = self.news.attachments.concat(response)
+      })
+      return false // 返回false不会自动上传
     },
-    handleRemove(file, fileList) {
-      var index = this.news.attachments.indexOf(file);
+    handleRemove (file, fileList) {
+      var index = this.news.attachments.indexOf(file)
       if (index > -1) {
-        this.news.attachments.splice(index, 1);
+        this.news.attachments.splice(index, 1)
       }
-      return false;
+      return false
     },
-    handlePreview(file) {
-      console.log(file);
+    handlePreview (file) {
+      console.log(file)
     },
-    save() {
-      var self = this;
+    save () {
+      var self = this
       if (this.news.id) {
-        newsapi.update(this.news).then(function(response) {
-          self.news.id = response.id;
-          self.getById();
-        });
+        newsapi.update(this.news).then(function (response) {
+          self.news.id = response.id
+          self.getById()
+        })
       } else {
-        newsapi.create(this.news).then(function(response) {
-          self.news.id = response.id;
-          self.getById();
-        });
+        newsapi.create(this.news).then(function (response) {
+          self.news.id = response.id
+          self.getById()
+        })
       }
     },
-    getById() {
-      var self = this;
-      newsapi.getById(self.news.id).then(function(response) {
-        self.news = response;
-      });
+    getById () {
+      var self = this
+      newsapi.getById(self.news.id).then(function (response) {
+        self.news = response
+      })
     },
-    back() {
-      this.$router.push({ name: "news" });
+    back () {
+      this.$router.push({ name: 'news' })
     }
   },
-  created() {
-    var self = this;
-    this.news.id = this.$route.query.newsId;
+  created () {
+    var self = this
+    this.news.id = this.$route.query.newsId
     if (this.news.id) {
-      self.getById();
+      self.getById()
     }
   }
-};
+}
 </script>
 
 <style scoped lang='scss'>

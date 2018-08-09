@@ -8,8 +8,8 @@
 
 <script>
 export default {
-  name: "AppMain"
-};
+  name: 'AppMain'
+}
 </script>
 
 <style scoped >
@@ -18,6 +18,6 @@ export default {
   /* margin-left: 100px; */
   padding: 20px;
   /* border:1px solid #FFFFF0; */
-  
+
 }
 </style>

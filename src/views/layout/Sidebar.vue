@@ -24,9 +24,9 @@
 
 <script>
 export default {
-  name: "Sidebar",
+  name: 'Sidebar'
   // props: ["active"]
-};
+}
 </script>
 
 <style scoped lang="scss" >

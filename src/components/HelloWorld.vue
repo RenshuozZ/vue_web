@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  
+  name: 'HelloWorld'
+
 }
 </script>
 
