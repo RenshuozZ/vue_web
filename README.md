@@ -5,6 +5,13 @@
 ## Build Setup
 
 ``` bash
+# install the last version node 
+https://nodejs.org
+
+# set npm registry 
+npm config set registry https://registry.npm.taobao.org
+(this step is a suggestion for chinese developer because of the network limitation)
+
 # install dependencies
 npm install
 
