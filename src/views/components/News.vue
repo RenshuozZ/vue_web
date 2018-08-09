@@ -1,6 +1,7 @@
 <template>
   <div class="news">
-    <el-button type="danger" v-on:click="del(multipleSelection)" plain>删除</el-button>
+    <!-- <el-button type="danger" v-on:click="del(multipleSelection)" plain>删除</el-button> -->
+    <el-button type="danger" v-on:click="del(multipleSelection)" icon="el-icon-delete">删除</el-button>
     <div class="search">
       <el-input v-model="keyword" placeholder="请输入内容"></el-input>
       <el-button type="primary" v-on:click="search" icon="el-icon-search">搜索</el-button>

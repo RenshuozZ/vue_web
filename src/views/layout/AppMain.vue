@@ -17,5 +17,7 @@ export default {
   overflow: hidden;
   /* margin-left: 100px; */
   padding: 20px;
+  /* border:1px solid #FFFFF0; */
+  
 }
 </style>

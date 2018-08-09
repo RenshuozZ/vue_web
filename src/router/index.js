@@ -22,12 +22,13 @@ const constantRouterMap = [{
     path: '/admin',
     name:'admin',
     component: Layout,
+    // meta: {requireAuth: true,name:"信息管理"},
     children: [
-        { path: '/admin/news', name:'news', component: () => import('@/views/components/News'),  meta: {requireAuth: true,},},
-        { path: '/admin/newsinfo',  name:'newsinfo', component: () => import('@/views/components/NewsInfo'),  meta: {requireAuth: true,},},
-        { path: '/admin/company',  name:'company', component: () => import('@/views/components/Company'),  meta: {requireAuth: true,},},
-        { path: '/admin/college',  name:'college', component: () => import('@/views/components/College'),  meta: {requireAuth: true,},},
-        { path: '/admin/laboratory', name:'laboratory', component: () => import('@/views/components/Laboratory'),  meta: {requireAuth: true,},},
+        { path: '/admin/news', name:'news', component: () => import('@/views/components/News'),  meta: {requireAuth: true,name:"信息管理>新闻管理"},},
+        { path: '/admin/newsinfo',  name:'newsinfo', component: () => import('@/views/components/NewsInfo'),  meta: {requireAuth: true,name:"信息管理>新闻操作"},},
+        { path: '/admin/company',  name:'company', component: () => import('@/views/components/Company'),  meta: {requireAuth: true,name:"信息管理>企业管理"},},
+        { path: '/admin/college',  name:'college', component: () => import('@/views/components/College'),  meta: {requireAuth: true,name:"信息管理>大学管理"},},
+        { path: '/admin/laboratory', name:'laboratory', component: () => import('@/views/components/Laboratory'),  meta: {requireAuth: true,name:"信息管理>实验室管理"},},
     ]
   },
 ];

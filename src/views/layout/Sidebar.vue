@@ -5,7 +5,7 @@
         <div class="logo-container">
           <img class="logo" src="../../assets/adminlogo.png" />
         </div>
-        <el-menu-item index="/admin">首页</el-menu-item>
+        <!-- <el-menu-item index="/admin">首页</el-menu-item> -->
         <el-submenu index="/admin">
           <template slot="title">
             信息管理

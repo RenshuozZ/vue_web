@@ -13,11 +13,8 @@
             </el-dropdown-menu>
           </el-dropdown>
           <span>王小虎</span>
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ name: 'admin' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>信息管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ name: 'news' }">文章管理</el-breadcrumb-item>
+          <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-top: 30px">           
+            <el-breadcrumb-item v-for="route in $route.matched" v-if="route.path != '/'" :to="route.path" :key="route.path">{{ route.meta.name }}</el-breadcrumb-item>
           </el-breadcrumb>
         </el-header>
         <app-main></app-main>
