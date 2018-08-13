@@ -8,7 +8,7 @@
       <el-button type="success" v-on:click="add" icon="el-icon-edit">新增</el-button>
     </div>
     <el-table :data="searchResult.list" @selection-change="handleSelectionChange">
-      <!-- <el-table-column type="selection" width="55" align="center">
+      <el-table-column type="selection" width="55" align="center">
       </el-table-column>
       <el-table-column prop="number" label="文章编号" align="center">
       </el-table-column>
@@ -25,7 +25,7 @@
           <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
           <el-button @click="del([scope.row])" type="text" size="small">删除</el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
     <div class="pagination">
       <el-pagination @current-change="handleCurrentChange" :current-page="searchResult.pageIndex" :page-size="searchResult.pageSize" layout="total, prev, pager, next, jumper" :total="searchResult.recordCount">
