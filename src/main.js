@@ -7,8 +7,9 @@ import router from './router'
 import store from './store/store'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import _const from './global'
 Vue.config.productionTip = false
-
+Vue.prototype._const = _const
 Vue.use(Element)
 /* eslint-disable no-new */
 new Vue({

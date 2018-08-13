@@ -67,16 +67,24 @@ export default {
     del (news) {
       var self = this
       var ids = []
-      if (news.length > 0) {
-        news.forEach(function (v) {
-          ids.push(v.id)
+      if (news.length === 0) {
+        this.$notify.error({
+          message: '请选择一个要删除的文章',
+          duration: self._const.notify_duration
         })
+        return
       }
-      if (ids.length > 0) {
-        newsapi.delete(ids).then(function (response) {
-          self.search()
+      news.forEach(function (v) {
+        ids.push(v.id)
+      })
+
+      newsapi.delete(ids).then(function (response) {
+        self.$notify.success({
+          message: '删除成功',
+          duration: self._const.notify_duration
         })
-      }
+        self.search()
+      })
     }
   },
   data: function () {

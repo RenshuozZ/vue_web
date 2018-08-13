@@ -81,11 +81,19 @@ export default {
       var self = this
       if (this.news.id) {
         newsapi.update(this.news).then(function (response) {
+          self.$notify.success({
+            message: '修改成功',
+            duration: self._const.notify_duration
+          })
           self.news.id = response.id
           self.getById()
         })
       } else {
         newsapi.create(this.news).then(function (response) {
+          self.$notify.success({
+            message: '新增成功',
+            duration: self._const.notify_duration
+          })
           self.news.id = response.id
           self.getById()
         })
