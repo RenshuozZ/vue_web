@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
 import Login from '../views/Login'
-import Dashboard from '../views/Dashboard'
 import Layout from '../views/layout/Layout'
 import Main from '../views/Main'
+import Dashboard from '../views/Dashboard'
+import NewsListView from '../views/NewsListView'
+import NewsInfoView from '../views/NewsInfoView'
 
 Vue.use(Router)
 
@@ -36,11 +38,22 @@ const constantRouterMap = [{
   path: '/main',
   name: 'main',
   component: Main,
-  children: [{
-    path: '/main/dashboard',
-    name: 'dashboard',
-    component: Dashboard
-  }
+  children: [
+    {
+      path: '/main/dashboard',
+      name: 'dashboard',
+      component: Dashboard
+    },
+    {
+      path: '/main/newslistview',
+      name: 'newslistview',
+      component: NewsListView
+    },
+    {
+      path: '/main/newsinfoview',
+      name: 'newsinfoview',
+      component: NewsInfoView
+    }
   ]
 }
 ]

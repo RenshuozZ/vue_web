@@ -109,7 +109,7 @@ export default {
       this.$router.push({ name: 'news' })
     }
   },
-  created () {
+  mounted () {
     var self = this
     this.news.id = this.$route.query.newsId
     if (this.news.id) {

@@ -15,5 +15,11 @@ export default {
 }
 </script>
 
-<style scoped >
+<style scoped lang="scss" >
+.main {
+  ol,
+  ul {
+    list-style: none;
+  }
+}
 </style>
