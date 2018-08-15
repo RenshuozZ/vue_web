@@ -1,6 +1,7 @@
 import axios from 'axios'
 // import qs from 'qs'
 import store from '../store/store'
+import router from '../router/index'
 import {
   Message
 } from 'element-ui'
@@ -41,28 +42,32 @@ service.interceptors.response.use(
   },
   error => {
     var errorMessage = error.message
-    if (!error.response) {
+    if (error.response) {
       if (error.response.status === 401) {
         // 401 清除token信息并跳转到登录页面
         store.commit('2')
         // 只有在当前路由不是登录页面才跳转
-        // if (router.currentRoute.name !== 'login') {
-        //   router.replace({
-        //     name: 'login',
-        //     query: {
-        //       redirect: router.currentRoute.path
-        //     }
-        //   })
-        // }
+        if (router.currentRoute.name !== 'login') {
+          router.replace({
+            name: 'login',
+            query: {
+              redirect: router.currentRoute.path
+            }
+          })
+        }
+        tryHideFullScreenLoading()
         return Promise.reject(error)
       }
-      errorMessage = error.response.data.userMessage
+      if (error.response.data) {
+        errorMessage = error.response.data.userMessage
+      }
     }
     Message({
       message: errorMessage,
       type: 'error',
       duration: 5 * 1000
     })
+    tryHideFullScreenLoading()
     return Promise.reject(error)
   }
 )

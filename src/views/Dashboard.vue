@@ -52,7 +52,10 @@
       <div class="title">
         <p>新闻资讯</p>
         <span>NEWS</span>
-        <a href="/newList.html">更多新闻</a>
+        <a href="/newList.html"></a>
+        <router-link :to="{name: 'newslistview' }">
+          更多新闻
+        </router-link>
       </div>
       <section class="content clearfix">
         <div class="left">
