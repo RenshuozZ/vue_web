@@ -3,7 +3,7 @@ import axios from 'axios'
 import store from '../store/store'
 import router from '../router/index'
 import {
-  Message
+  Notification
 } from 'element-ui'
 import {
   showFullScreenLoading,
@@ -62,10 +62,15 @@ service.interceptors.response.use(
         errorMessage = error.response.data.userMessage
       }
     }
-    Message({
+    // Message({
+    //   message: errorMessage,
+    //   type: 'error',
+    //   duration: 2 * 1000
+    // })
+    Notification({
       message: errorMessage,
       type: 'error',
-      duration: 5 * 1000
+      duration: 2 * 1000
     })
     tryHideFullScreenLoading()
     return Promise.reject(error)
