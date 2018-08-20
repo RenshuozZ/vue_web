@@ -79,10 +79,8 @@ npm run build --report
 #### Base Framework
 &ensp;&ensp;&ensp;[Vue](https://cn.vuejs.org/v2/guide/)—— a progressive framework for building user interfaces.
 #### UI Component
-&ensp;&ensp;&ensp;[Element-Ui](http://wenku.baidu.com/view/23cc1a6527d3240c8447efbf.html)—— a Vue 2.0 based component library for developers, designers and product managers.
+&ensp;&ensp;&ensp;[Element-Ui](https://cn.vuejs.org)—— a Vue 2.0 based component library for developers, designers and product managers.
 #### HTTP Request
 &ensp;&ensp;&ensp;[Axios](https://www.kancloud.cn/yunye/axios/234845)—— a promise based HTTP library that can be used in browsers and node.js.
 #### State Store
 &ensp;&ensp;&ensp;[Vuex](https://vuex.vuejs.org/)—— a state management pattern + library for Vue.js applications.
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
