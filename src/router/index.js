@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
+import HelloWorld from '../components/HelloWorld'
 import Login from '../views/Login'
 import Layout from '../views/layout/Layout'
 import Main from '../views/Main'
@@ -16,6 +17,11 @@ const constantRouterMap = [{
   component: Dashboard,
   // 重定向
   redirect: '/main/dashboard'
+},
+{
+  path: '/hello',
+  name: 'hello',
+  component: HelloWorld
 },
 {
   path: '/login',
