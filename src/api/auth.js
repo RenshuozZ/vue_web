@@ -1,10 +1,7 @@
 import api from '@/utils/api'
 
 export default {
-  authToken (username, password) {
-    return api.post('/auth', {
-      'username': username,
-      'password': password
-    })
+  authToken (loginForm) {
+    return api.post('/auth', loginForm)
   }
 }

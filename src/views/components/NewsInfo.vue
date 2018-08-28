@@ -1,7 +1,7 @@
 <template>
   <div class="newsInfo">
-    <el-form label-position="right" :model="news" label-width="80px">
-      <el-form-item label="文章标题:">
+    <el-form label-position="right" :model="news" :rules="newsFormRules" label-width="100px" ref="newsForm">
+      <el-form-item label="文章标题:" prop="title">
         <el-input v-model="news.title"></el-input>
       </el-form-item>
       <el-form-item label="文章来源:">
@@ -10,7 +10,7 @@
       <el-form-item label="文章作者:">
         <el-input v-model="news.author"></el-input>
       </el-form-item>
-      <el-form-item label="活动时间:">
+      <el-form-item label="发布时间:" prop="releaseTime">
         <el-col>
           <el-date-picker type="date" placeholder="选择日期" v-model="news.releaseTime"></el-date-picker>
         </el-col>
@@ -43,7 +43,14 @@ export default {
   components: {
     VueEditor
   },
-  data () {
+  data: function () {
+    const validateRequire = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('请输入用户名'))
+      } else {
+        callback()
+      }
+    }
     return {
       news: {
         id: null,
@@ -54,6 +61,14 @@ export default {
         content: '',
         releaseTime: null,
         attachments: []
+      },
+      newsFormRules: {
+        title: [
+          { required: true, trigger: 'blur', validator: validateRequire }
+        ],
+        releaseTime: [
+          { required: true, trigger: 'blur', validator: validateRequire }
+        ]
       }
     }
   },
@@ -79,25 +94,29 @@ export default {
     },
     save () {
       var self = this
-      if (this.news.id) {
-        newsapi.update(this.news).then(function (response) {
-          self.$notify.success({
-            message: '修改成功',
-            duration: self._const.notify_duration
-          })
-          self.news.id = response.id
-          self.getById()
-        })
-      } else {
-        newsapi.create(this.news).then(function (response) {
-          self.$notify.success({
-            message: '新增成功',
-            duration: self._const.notify_duration
-          })
-          self.news.id = response.id
-          self.getById()
-        })
-      }
+      this.$refs.newsForm.validate(valid => {
+        if (valid) {
+          if (this.news.id) {
+            newsapi.update(this.news).then(function (response) {
+              self.$notify.success({
+                message: '修改成功',
+                duration: self._const.notify_duration
+              })
+              self.news.id = response.id
+              self.getById()
+            })
+          } else {
+            newsapi.create(this.news).then(function (response) {
+              self.$notify.success({
+                message: '新增成功',
+                duration: self._const.notify_duration
+              })
+              self.news.id = response.id
+              self.getById()
+            })
+          }
+        }
+      })
     },
     getById () {
       var self = this
