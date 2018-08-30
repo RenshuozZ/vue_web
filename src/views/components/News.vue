@@ -1,32 +1,36 @@
 <template>
   <div class="news">
     <!-- <el-button type="danger" v-on:click="del(multipleSelection)" plain>删除</el-button> -->
-    <el-button type="danger" v-on:click="del(multipleSelection)" icon="el-icon-delete">删除</el-button>
-    <div class="search">
-      <el-input v-model="keyword" placeholder="请输入内容"></el-input>
-      <el-button type="primary" v-on:click="search" icon="el-icon-search">搜索</el-button>
-      <el-button type="success" v-on:click="add" icon="el-icon-edit">新增</el-button>
+    <div class="tolbar">
+      <el-button type="danger" v-on:click="del(multipleSelection)" icon="el-icon-delete">删除</el-button>
+      <div class="search">
+        <el-input v-model="keyword" placeholder="请输入内容"></el-input>
+        <el-button type="primary" v-on:click="search" icon="el-icon-search">搜索</el-button>
+        <el-button type="success" v-on:click="add" icon="el-icon-edit">新增</el-button>
+      </div>
     </div>
-    <el-table :data="searchResult.list" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center">
-      </el-table-column>
-      <el-table-column prop="number" label="文章编号" align="center">
-      </el-table-column>
-      <el-table-column prop="title" label="文章标题" align="center">
-      </el-table-column>
-      <el-table-column prop="author" label="作者" align="center">
-      </el-table-column>
-      <el-table-column prop="source" label="来源" align="center">
-      </el-table-column>
-      <el-table-column prop="releaseTime" label="发布时间" align="center">
-      </el-table-column>
-      <el-table-column label="操作" align="center">
-        <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
-          <el-button @click="del([scope.row])" type="text" size="small">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div>
+      <el-table :data="searchResult.list" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55" align="center">
+        </el-table-column>
+        <el-table-column prop="number" label="文章编号" align="center">
+        </el-table-column>
+        <el-table-column prop="title" label="文章标题" align="center">
+        </el-table-column>
+        <el-table-column prop="author" label="作者" align="center">
+        </el-table-column>
+        <el-table-column prop="source" label="来源" align="center">
+        </el-table-column>
+        <el-table-column prop="releaseTime" label="发布时间" align="center">
+        </el-table-column>
+        <el-table-column label="操作" align="center">
+          <template slot-scope="scope">
+            <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
+            <el-button @click="del([scope.row])" type="text" size="small">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
     <div class="pagination">
       <el-pagination @current-change="handleCurrentChange" :current-page="searchResult.pageIndex" :page-size="searchResult.pageSize" layout="total, prev, pager, next, jumper" :total="searchResult.recordCount">
       </el-pagination>
@@ -92,7 +96,7 @@ export default {
       searchResult: {
         list: [],
         pageIndex: null,
-        pageSize: null,
+        pageSize: 10,
         recordCount: null
       },
       keyword: '',
@@ -107,6 +111,9 @@ export default {
 
 <style scoped lang='scss'>
 .news {
+  .tolbar{
+    overflow:hidden
+  }
   .search {
     float: right;
     margin: 0 0 30px 0;

@@ -15,7 +15,7 @@ export default {
 <style scoped >
 .appMain {
   overflow: hidden;
-  /* margin-left: 100px; */
+  /* margin-left: 20px; */
   padding: 20px;
   /* border:1px solid #FFFFF0; */
 
