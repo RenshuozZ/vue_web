@@ -29,6 +29,10 @@
         </li>
       </ul>
     </div>
+    <div class="pagination">
+      <el-pagination @current-change="handleCurrentChange" :current-page="searchResult.pageIndex" :page-size="searchResult.pageSize" layout="total, prev, pager, next, jumper" :total="searchResult.recordCount">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -37,11 +41,16 @@ import newsapi from '../api/new'
 export default {
   name: 'NewsListView',
   methods: {
+    handleCurrentChange (val) {
+      this.searchResult.pageIndex = val
+      this.search()
+    },
     search () {
       var vm = this
-      newsapi.searchNews(null, 1, 10).then(function (response) {
-        vm.searchResult = response
-      })
+      newsapi.searchNews(null, vm.searchResult.pageIndex, vm.searchResult.pageSize)
+        .then(function (response) {
+          vm.searchResult = response
+        })
     }
   },
   mounted () {
@@ -52,7 +61,7 @@ export default {
       searchResult: {
         list: [],
         pageIndex: null,
-        pageSize: null,
+        pageSize: 10,
         recordCount: null
       }
     }
@@ -79,7 +88,7 @@ export default {
   }
   font-size: 14px;
   .main {
-    width: 800px;
+    width: 1200px;
     margin: 0 auto;
     .title {
       color: #999;
@@ -108,6 +117,7 @@ export default {
         h1 {
           font-size: 20px;
           color: #121212;
+          font-weight: normal;
         }
         p {
           color: #999999;
@@ -118,7 +128,7 @@ export default {
       }
     }
   }
-  .content{
+  .content {
     height: 30px;
   }
   .oneLine {
@@ -130,6 +140,10 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+  .pagination {
+    text-align: center;
+    margin-bottom: 30px;
   }
 }
 </style>
